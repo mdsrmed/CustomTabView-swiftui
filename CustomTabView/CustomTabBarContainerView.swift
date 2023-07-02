@@ -35,9 +35,7 @@ struct CustomTabBarContainerView<Content:View>: View {
 struct CustomTabBarContainerView_Previews: PreviewProvider {
     
     static let tabs: [TabBarItem] = [
-        TabBarItem(iconName: "house", title: "Home", color: Color.green),
-        TabBarItem(iconName: "heart", title: "Favorites", color: Color.red),
-        TabBarItem(iconName: "person", title: "Profile", color: Color.blue)
+        .home, .favorites, .profile
     ]
     static var previews: some View {
         CustomTabBarContainerView(selection: .constant(tabs.first!)) {
