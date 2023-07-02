@@ -12,23 +12,13 @@ struct CustomTabBarView: View {
     
     let tabs: [TabBarItem]
     @Binding  var selection: TabBarItem
+    @Namespace private var namespace
     
     
     
     var body: some View {
-        HStack {
-            ForEach(tabs, id: \.self) { tab in
-                tabView(tab: tab)
-                    .onTapGesture {
-                        switchToTab(tab: tab)
-                    }
-            }
-            
-        }
-        .padding(6)
-        .background(
-            Color.white.ignoresSafeArea(edges: .bottom))
         
+        tabBarVersion2()
     }
 }
 
@@ -68,6 +58,21 @@ extension CustomTabBarView {
             selection = tab
         }
     }
+    
+    private func tabBarVersion1() -> some View {
+        HStack {
+            ForEach(tabs, id: \.self) { tab in
+                tabView(tab: tab)
+                    .onTapGesture {
+                        switchToTab(tab: tab)
+                    }
+            }
+            
+        }
+        .padding(6)
+        .background(
+            Color.white.ignoresSafeArea(edges: .bottom))
+    }
 }
 
 
@@ -76,3 +81,44 @@ extension CustomTabBarView {
 //    let title: String
 //    let color: Color
 //}
+extension CustomTabBarView {
+    func tabView2(tab: TabBarItem) -> some View {
+        VStack {
+            Image(systemName: tab.iconName)
+                .font(.subheadline)
+            
+            Text(tab.title)
+                .font(.system(size: 10,weight: .semibold))
+        }
+        .frame(maxWidth: .infinity)
+        .foregroundColor(selection == tab ? tab.color: Color.gray)
+        .padding(.vertical,8)
+        .background(
+            ZStack {
+                if selection == tab {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(tab.color.opacity(0.2))
+                        .matchedGeometryEffect(id: "bg" , in: namespace)
+                }
+            })
+        .cornerRadius(10)
+    }
+    
+    private func tabBarVersion2() -> some View {
+        HStack {
+            ForEach(tabs, id: \.self) { tab in
+                tabView2(tab: tab)
+                    .onTapGesture {
+                        switchToTab(tab: tab)
+                    }
+            }
+            
+        }
+        .padding(6)
+        .background(
+            Color.white.ignoresSafeArea(edges: .bottom))
+        .cornerRadius(10)
+        .shadow(color: Color.black.opacity(0.3), radius: 10,x: 0, y: 5)
+        .padding(.horizontal)
+    }
+}
