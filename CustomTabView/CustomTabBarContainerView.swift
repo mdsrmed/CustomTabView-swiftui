@@ -23,7 +23,7 @@ struct CustomTabBarContainerView<Content:View>: View {
                 content
                 .ignoresSafeArea()
                 
-                CustomTabBarView(tabs: tabs, selection: $selection)
+            CustomTabBarView(tabs: tabs, selection: $selection, localSelection: selection)
             }
             .onPreferenceChange(TabBarItemsPreferenceKey.self) { value in
                 self.tabs =  value

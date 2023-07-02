@@ -9,13 +9,14 @@ import Foundation
 import SwiftUI
 
 enum TabBarItem: Hashable {
-    case home, favorites, profile
+    case home, favorites, profile, messages
     
     var iconName: String {
         switch self {
         case .home: return "house"
         case .favorites: return "heart"
         case .profile: return "person"
+        case .messages: return "message"
         }
     }
     
@@ -24,6 +25,7 @@ enum TabBarItem: Hashable {
         case .home: return "Home"
         case .favorites: return "Favories"
         case .profile: return "Profile"
+        case .messages: return "Messages"
         }
     }
     
@@ -32,6 +34,7 @@ enum TabBarItem: Hashable {
         case .home: return Color.green
         case .favorites: return Color.red
         case .profile: return Color.blue
+        case .messages: return Color.mint
         }
     }
     

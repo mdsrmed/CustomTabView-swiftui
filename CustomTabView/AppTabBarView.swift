@@ -21,6 +21,9 @@ struct AppTabBarView: View {
             
             Color.blue
                 .tabBarItem(tab: .profile, selection: $tabSelection)
+            
+            Color.mint
+                .tabBarItem(tab: .messages, selection: $tabSelection)
         }
     }
 }
